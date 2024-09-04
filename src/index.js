@@ -29,14 +29,17 @@ const getit = async (country) => {
 };
 
 const getloc = () => {
-  navigator.geolocation.getCurrentPosition(async (e) => {
-    const { latitude: lat, longitude: lng } = e.coords;
-    const res = await fetch(
-      `https://geocode.xyz/${lat},${lng}?geoit=json&auth=884174359364682846726x36503`
-    );
-    const data = await res.json();
-    getit(data.country);
-  });
+  navigator.geolocation.getCurrentPosition(
+    async (e) => {
+      const { latitude: lat, longitude: lng } = e.coords;
+      const res = await fetch(
+        `https://geocode.xyz/${lat},${lng}?geoit=json&auth=884174359364682846726x36503`
+      );
+      const data = await res.json();
+      getit(data.country);
+    },
+    (e) => alert(e)
+  );
 };
 getloc();
 form.addEventListener("submit", (e) => {
